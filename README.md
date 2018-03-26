@@ -6,3 +6,6 @@
 
 SQL код для создания MySQL таблиц находится в:
 dw\public\documentation\create_table.sql
+
+Последние изменения и планы по улучшению можно посмотреть в:
+dw\public\documentation\index.html
