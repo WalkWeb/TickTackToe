@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #2b2b2b;
+}
+
+h1, h2, h3, p, li {
+    color: #a1a1a1;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    padding: 20px 0 30px 0;
+}
+
+h2 {
+    padding: 0 0 20px 0;
+}
+
+h3 {
+    padding: 60px 0 20px 0;
+}
+
+p {
+    padding: 0 0 15px 0;
+}
+
+.menu {
+    width: 100%;
+    background: #3c3f41;
+    border-bottom: 1px solid #4b4b4b;
+}
+
+.main {
+    width: 100%;
+}
+
+.content {
+    padding: 20px;
+}
+
+#main_content {
+    padding: 20px;
+}
+
+.statictics {
+    border-top: 1px solid #4b4b4b;
+    width: 100%;
+    background: #3c3f41;
+}
+
+.statictics p {
+    font-size: 13px;
+}
+
+.navigation {
+    margin: 0 auto;
+    text-align: center;
+    list-style: none;
+}
+
+.navigation>li {
+    display: inline-block;
+    vertical-align: middle;
+    position: static;
+    border-left: 1px solid #5b5b5b;
+    border-right: 1px solid #5b5b5b;
+}
+
+ul.navigation>li>a {
+    display: block;
+    color: #a1a1a1;
+    padding: 20px;
+}
+
+ul.navigation>li>a:hover {
+    color: #c1a1a1;
+}
+
+.box {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.infobox {
+    width: 33%;
+    display: inline-block;
+    vertical-align: top;
+    position: static;
+}
+
+.infocontent {
+    padding: 20px 0;
+}
+
+ul.base {
+    padding: 0 0 0 20px;
+}
+
+ul.base>li {
+    padding: 0 20px 5px 0;
+}
+
+b {
+    color: #d45500;
+    font-weight: 100;
+}
+
+@media (max-width: 1000px) {
+    .infobox {
+        width: 49%;
+    }
+
+    ul.navigation>li>a {
+        display: block;
+        color: #a1a1a1;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 700px) {
+    .infobox {
+        width: 100%;
+    }
+}
