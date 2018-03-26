@@ -60,22 +60,10 @@ class GameBot
             $cell = 5;
             $query->moveHere($game['id'], $cell, $this->v);
         }
-        // Если центральная точка занята - ходим в угловые
-        // TODO Как вариант улучшения - добавить случайный выбор угловой ячейки
-        elseif (!$query->checkCell($game['id'], 1)) {
-            $cell = 1;
-            $query->moveHere($game['id'], $cell, $this->v);
-        }
-        elseif (!$query->checkCell($game['id'],3)) {
-            $cell = 3;
-            $query->moveHere($game['id'], $cell, $this->v);
-        }
-        elseif (!$query->checkCell($game['id'], 7)) {
-            $cell = 7;
-            $query->moveHere($game['id'], $cell, $this->v);
-        }
-        elseif (!$query->checkCell($game['id'],9)) {
-            $cell = 9;
+        // Если центральная точка занята - ходим в угловые (в текущем варианте проверка проходит два раза,
+        // но в целом на механику это не влияет)
+        elseif ($this->checkCornerCells($game['id'])) {
+            $cell = $this->checkCornerCells($game['id']);
             $query->moveHere($game['id'], $cell, $this->v);
         }
         // Иначе - ходим в любую свободную ячейку
@@ -186,6 +174,36 @@ class GameBot
         }
 
         GameLogs::setLog('searchFreeCell: Все ячейки на поле заняты');
+        return false;
+    }
+
+    /**
+     * Проверяет наличие свободных уловых ячеек и возвращает случайную из них, либо false - если свободных нет
+     *
+     * @param $game_id int ID игры
+     * @return bool|mixed Номер свободной угловой ячейки или false - свободных угловых ячеек нет
+     */
+    public function checkCornerCells($game_id)
+    {
+        $query = new GameQuery();
+        $cornerCells = [];
+
+        GameLogs::setLog('checkCornerCells: Начинаем проверку угловых ячеек');
+
+        if (!$query->checkCell($game_id, 1)) $cornerCells[] = 1;
+        if (!$query->checkCell($game_id, 3)) $cornerCells[] = 3;
+        if (!$query->checkCell($game_id, 7)) $cornerCells[] = 7;
+        if (!$query->checkCell($game_id, 9)) $cornerCells[] = 9;
+
+        // Если есть свободные ячейки - возвращаем случайную из них
+        if ($cornerCells) {
+            $cell = $cornerCells[array_rand($cornerCells)];
+            GameLogs::setLog('checkCornerCells: Выбрана угловая чейка: ' . $cell);
+            return $cell;
+        }
+
+        GameLogs::setLog('checkCornerCells: Нет свободных угловых ячеек');
+
         return false;
     }
 
